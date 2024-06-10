@@ -1,0 +1,141 @@
+/* styles/Home.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 2rem;
+    background-color: #fafafa;
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 50px;
+  }
+  
+  .left, .right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .phoneImage {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .formContainer {
+    background: white;
+    padding: 40px;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #262626;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #8e8e8e;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .button {
+    padding: 10px;
+    border: none;
+    background-color: #3897f0;
+    color: white;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .or {
+    margin: 20px 0;
+    font-size: 1rem;
+    color: #8e8e8e;
+    position: relative;
+  }
+  
+  .or::before, .or::after {
+    content: '';
+    display: block;
+    width: 40%;
+    height: 1px;
+    background-color: #dbdbdb;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .or::before {
+    left: 0;
+  }
+  
+  .or::after {
+    right: 0;
+  }
+  
+  .facebookButton {
+    padding: 10px;
+    border: none;
+    background-color: #4267b2;
+    color: white;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .signupContainer {
+    margin-top: 20px;
+  }
+  
+  .signupText {
+    font-size: 1rem;
+    color: #8e8e8e;
+  }
+  
+  .signupLink {
+    color: #3897f0;
+    text-decoration: none;
+  }
+  
+  .footer {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    background-color: #fafafa;
+    border-top: 1px solid #dbdbdb;
+    margin-top: 50px;
+  }
+  
+  .footer p {
+    color: #8e8e8e;
+    font-size: 1rem;
+  }
