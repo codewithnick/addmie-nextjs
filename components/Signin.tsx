@@ -10,23 +10,29 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { CircularProgress } from '@mui/material';
+import Cookies from 'js-cookie';
 
+
+const url=process.env.NEXT_PUBLIC_BASE_URL;
 export default function   In() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errormessage,setErrormessage] =useState('');
+  const [loading,setLoading]=useState(false);
   const handleSubmit = (event:any) => {
     event.preventDefault();
+    setLoading(true);
     axios( {
       method: 'post',
-      url:'http://localhost:3000/api/user/login',
+      url:url+'/api/user/login',
       headers: { 'Content-Type': 'application/json',username,password},
       data:{}
     }).then((response)=>{
       if(response.status===200)
       {
-        document.cookie="username:"+username+";";
-        document.cookie="token:"+response.data.token+";";
+        Cookies.set("username",username);
+        Cookies.set("token",response.data.token);
         console.log('user logged in sucessfully');
         setErrormessage('');
       }
@@ -38,6 +44,8 @@ export default function   In() {
       const errormsg=e.response.data.message??"Some Error Occured";
       setErrormessage(errormsg);
       console.log(e);
+  }).finally(()=>{
+    setLoading(false);
   });
   };
   const handleUsernameChange = (event:any) => {
@@ -93,15 +101,18 @@ export default function   In() {
               </Grid>
 
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleSubmit}
-            >
-              Sign In
-            </Button>
+            <Grid container justifyContent={'center'}>
+              {!loading?(<Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Sign In
+              </Button>
+              ):(<CircularProgress sx={{m:2}}></CircularProgress>)}
+            </Grid>
             <Typography color={'red'} fontSize={14}>
               {errormessage}
             </Typography>
@@ -113,8 +124,7 @@ export default function   In() {
               </Grid>
             </Grid>
           </Box>
-        </Box>
-
+        </Box>      
       </Container>
     
   );

@@ -12,7 +12,7 @@ export async function POST(
         const username= requestHeaders.get('username');
         const password= requestHeaders.get('password');
         const db = client.db('profile');
-        const user = db.collection('user');
+        const user = db.collection('pass');
         const result=await user.findOne({username, password})
         if(result && adminsecret){
             const token=jwt.sign({username},adminsecret);

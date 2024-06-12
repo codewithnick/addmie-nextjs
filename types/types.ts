@@ -1,6 +1,7 @@
 
 export interface JwtPayload {
     username?: string;
+    token?:string;
 }
 export type Data = {
     message?: string;
