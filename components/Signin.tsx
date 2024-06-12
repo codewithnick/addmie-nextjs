@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { CircularProgress } from '@mui/material';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 
 const url=process.env.NEXT_PUBLIC_BASE_URL;
@@ -20,6 +21,7 @@ export default function   In() {
   const [password, setPassword] = useState('');
   const [errormessage,setErrormessage] =useState('');
   const [loading,setLoading]=useState(false);
+  const router=useRouter();
   const handleSubmit = (event:any) => {
     event.preventDefault();
     setLoading(true);
@@ -35,6 +37,7 @@ export default function   In() {
         Cookies.set("token",response.data.token);
         console.log('user logged in sucessfully');
         setErrormessage('');
+        router.push('/user');
       }
       else{
         setErrormessage(response.data.message??"Some error occured");
