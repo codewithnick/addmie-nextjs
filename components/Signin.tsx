@@ -1,5 +1,5 @@
 "use client"
-import * as React from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -11,29 +11,32 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-
-
 export default function   In() {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errormessage,setErrormessage] =useState('');
   const handleSubmit = (event:any) => {
     event.preventDefault();
     axios( {
       method: 'post',
-      url:'http://localhost:3000/users/login',
+      url:'http://localhost:3000/api/user/login',
       headers: { 'Content-Type': 'application/json',username,password},
       data:{}
     }).then((response)=>{
-      if(response.status==200)
+      if(response.status===200)
       {
-        localStorage.setItem('token','Bearer '+response.data.token);
+        document.cookie="username:"+username+";";
+        document.cookie="token:"+response.data.token+";";
         console.log('user logged in sucessfully');
+        setErrormessage('');
       }
       else{
-        alert('Error');
+        setErrormessage(response.data.message??"Some error occured");
         console.error(response);
       }
     }).catch(e => {
+      const errormsg=e.response.data.message??"Some Error Occured";
+      setErrormessage(errormsg);
       console.log(e);
   });
   };
@@ -99,6 +102,9 @@ export default function   In() {
             >
               Sign In
             </Button>
+            <Typography color={'red'} fontSize={14}>
+              {errormessage}
+            </Typography>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/signup" variant="body2">

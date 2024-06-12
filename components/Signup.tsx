@@ -20,7 +20,7 @@ export default function SignUp() {
     event.preventDefault();
     axios( {
       method: 'post',
-      url:'http://localhost:3000/users/signup',
+      url:'http://localhost:3000/user/register',
       headers: { 'Content-Type': 'application/json' },
       data:{
           username,
